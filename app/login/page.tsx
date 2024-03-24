@@ -114,6 +114,9 @@ export default function Login({
             {searchParams.message}
           </p>
         )}
+        <div className="text-center">
+          <Link href="/signup">No account? Create and account.</Link>
+        </div>
       </form>
     </div>
   );

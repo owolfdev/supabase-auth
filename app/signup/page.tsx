@@ -126,6 +126,9 @@ export default function Signup({
             {searchParams.message}
           </p>
         )}
+        <div className="text-center">
+          <Link href="/login">Already have an account? Sign in.</Link>
+        </div>
       </form>
     </div>
   );
