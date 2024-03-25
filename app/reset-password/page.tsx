@@ -4,39 +4,35 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { SubmitButton } from "./submit-button";
 
-export default function Signup({
+export default function Login({
   searchParams,
 }: {
   searchParams: { message: string };
 }) {
-  const signUp = async (formData: FormData) => {
+  const resetPassword = async (formData: FormData) => {
     "use server";
-
-    const origin = headers().get("origin");
     const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
-    const confirmPassword = formData.get("confirm-password") as string;
     const supabase = createClient();
+    const origin = headers().get("origin");
 
-    if (password !== confirmPassword) {
-      return redirect("/signup?message=Passwords do not match");
-    }
-
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: `${origin}/auth/callback`,
-      },
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${origin}/auth/callback`,
     });
 
     if (error) {
-      return redirect("/signup?message=Error signing up user");
+      console.error("Error sending password reset email:", error.message);
+      return {
+        status: "error",
+        message: "Could not send password reset email. Please try again later.",
+      };
     }
 
-    return redirect(
-      "/signup/thank-you?message=Check your email inbox to confirm sign up."
-    );
+    redirect("/reset-password/thank-you?message=Password reset email sent.");
+
+    return {
+      status: "success",
+      message: "Password reset email sent. Please check your inbox.",
+    };
   };
 
   return (
@@ -64,7 +60,7 @@ export default function Signup({
 
       <form className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground">
         <label className="text-md" htmlFor="email">
-          Email
+          Add your account email to reset your password
         </label>
         <input
           className="rounded-md px-4 py-2 bg-inherit border mb-6"
@@ -73,44 +69,28 @@ export default function Signup({
           placeholder="you@example.com"
           required
         />
-        <label className="text-md" htmlFor="password">
-          Password
-        </label>
-        <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
-          type="password"
-          name="password"
-          placeholder="••••••••"
-          required
-        />
-        <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
-          type="password"
-          name="confirm-password"
-          placeholder="••••••••"
-          required
-        />
-        {/* <SubmitButton
-          formAction={signIn}
-          className="bg-green-700 rounded-md px-4 py-2 text-foreground mb-2"
-          pendingText="Signing In..."
-        >
-          Sign In
-        </SubmitButton> */}
+
         <SubmitButton
+          formAction={resetPassword}
+          className="bg-green-700 rounded-md px-4 py-2 text-foreground mb-2"
+          pendingText="Sending Reset Link..."
+        >
+          Reset Password
+        </SubmitButton>
+        {/* <SubmitButton
           formAction={signUp}
           className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
           pendingText="Signing Up..."
         >
           Sign Up
-        </SubmitButton>
+        </SubmitButton> */}
         {searchParams?.message && (
           <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
             {searchParams.message}
           </p>
         )}
         <div className="text-center">
-          <Link href="/login">Already have an account? Sign in.</Link>
+          <Link href="/login">Cancel</Link>
         </div>
       </form>
     </div>
