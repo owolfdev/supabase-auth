@@ -9,6 +9,20 @@ import { SubmitButton } from "./submit-button";
 import { headers } from "next/headers";
 import Link from "next/link";
 
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose,
+} from "@/components/ui/dialog";
+
+import { Label } from "@/components/ui/label";
+
 export default async function ProfilePage({
   searchParams,
 }: {
@@ -59,18 +73,28 @@ export default async function ProfilePage({
     };
   };
 
+  const deleteUserAccount = async (formData: FormData) => {
+    "use server";
+    console.log("delete user account");
+  };
+
+  const noAction = async (formData: FormData) => {
+    "use server";
+    console.log("no action");
+  };
+
   return (
     <div className="flex-1 flex flex-col w-full px-8 sm:max-w-lg gap-2 py-24">
       <h1 className="font-bold text-4xl pb-4">Profile Page</h1>
+      <div>
+        <span className="font-bold">User name:</span>{" "}
+        {profile?.name || "no name given"}
+      </div>
       <div>
         <span className="font-bold">User email:</span> {user.email}
       </div>
       <div>
         <span className="font-bold">User id:</span> {user.id}
-      </div>
-      <div>
-        <span className="font-bold">User name:</span>{" "}
-        {profile?.name || "no name given"}
       </div>
 
       <form className="animate-in flex-1 flex flex-col w-full gap-2 text-foreground pt-8">
@@ -103,16 +127,46 @@ export default async function ProfilePage({
           <div className="">
             <Link href="/reset-password">Reset your account password.</Link>
           </div>
-          <div>
-            <SubmitButton
-              formAction={updateUserName}
-              className="bg-red-400 rounded-md px-4 py-2 text-foreground mb-2"
-              pendingText="Sending Reset Link..."
-            >
-              Delete Account
-            </SubmitButton>
-          </div>
+          <div></div>
         </div>
+      </form>
+      <form action={noAction}>
+        {" "}
+        <Dialog>
+          <DialogTrigger asChild>
+            <div>
+              <Button formAction={noAction} variant="outline">
+                Delete User Account
+              </Button>
+            </div>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Delete User Account?</DialogTitle>
+              <DialogDescription>
+                Are you sure you want to delete your account? This action is
+                irreversible.
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <form action={deleteUserAccount}>
+                <div className="flex gap-4 items-center">
+                  <Button formAction={noAction} variant="outline">
+                    <DialogClose>Cancel</DialogClose>
+                  </Button>
+                  <DialogClose>
+                    <Button
+                      formAction={deleteUserAccount}
+                      variant="destructive"
+                    >
+                      Delete This Account
+                    </Button>
+                  </DialogClose>
+                </div>
+              </form>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </form>
     </div>
   );

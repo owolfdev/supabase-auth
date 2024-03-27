@@ -15,18 +15,23 @@ export default async function Index() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const { data: profile } = await supabase
+  const { data: profile, error: profileError } = await supabase
     .from("profiles")
     .select()
     .eq("id", user?.id)
     .single();
 
+  // if (profileError) {
+  //   // Handle error, for example, render a message indicating profile loading failed
+  //   return <div className="h-full">Error loading profile.</div>;
+  // }
+
   if (!user) {
-    return redirect("/login");
+    redirect("/login");
   }
 
   return (
-    <div className="flex-1 flex flex-col justify-center w-full px-8 sm:max-w-lg gap-2 py-24">
+    <div className="flex-1 flex flex-col w-full px-8 sm:max-w-lg gap-2 py-24">
       <h1 className="font-bold text-4xl pb-4 text-center">
         Supabase Auth Template
       </h1>
