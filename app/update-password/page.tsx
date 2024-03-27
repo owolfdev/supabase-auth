@@ -11,33 +11,6 @@ export default async function UpdateUser({
 }) {
   console.log("code: ", searchParams.code);
 
-  // async function exchangeCodeForSession() {
-  //   const supabase = createClient();
-  //   const { data, error } = await supabase.auth.exchangeCodeForSession(
-  //     searchParams.code
-  //   );
-  //   if (error) {
-  //     console.error(error);
-  //   } else {
-  //     console.log("succes! session:", data);
-  //     console.log("session.access_token: ", data.session.access_token);
-  //     console.log("session.refresh_token: ", data.session.refresh_token);
-
-  //     const access_token = data.session.access_token;
-  //     const refresh_token = data.session.refresh_token;
-
-  //     await supabase.auth.setSession({
-  //       refresh_token: refresh_token,
-  //       access_token: access_token,
-  //     });
-  //     //
-  //     const mySession = await supabase.auth.getSession();
-  //     console.log("mySession: ", mySession);
-  //   }
-  // }
-
-  // exchangeCodeForSession();
-
   const changePassword = async (formData: FormData) => {
     "use server";
     const origin = headers().get("origin");
@@ -112,15 +85,8 @@ export default async function UpdateUser({
         >
           Change Password
         </SubmitButton>
-        {/* <SubmitButton
-          formAction={signUp}
-          className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
-          pendingText="Signing Up..."
-        >
-          Sign Up
-        </SubmitButton> */}
         {searchParams?.message && (
-          <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
+          <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center bg-gray-200 rounded-md">
             {searchParams.message}
           </p>
         )}

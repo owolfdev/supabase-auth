@@ -4,11 +4,21 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { SubmitButton } from "./submit-button";
 
-export default function Login({
+export default async function Login({
   searchParams,
 }: {
   searchParams: { message: string };
 }) {
+  const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (user) {
+    return redirect("/");
+  }
+
   const signIn = async (formData: FormData) => {
     "use server";
 
@@ -59,20 +69,13 @@ export default function Login({
         >
           Sign In
         </SubmitButton>
-        {/* <SubmitButton
-          formAction={signUp}
-          className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
-          pendingText="Signing Up..."
-        >
-          Sign Up
-        </SubmitButton> */}
         {searchParams?.message && (
-          <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
+          <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center bg-gray-200 rounded-md">
             {searchParams.message}
           </p>
         )}
         <div className="text-center">
-          <Link href="/signup">No account? Create and account.</Link>
+          <Link href="/signup">No account? Create an account.</Link>
         </div>
         <div className="text-center">
           <Link href="/reset-password">Forgot your password?</Link>

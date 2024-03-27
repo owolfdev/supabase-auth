@@ -21,13 +21,18 @@ export default function Login({
 
     if (error) {
       console.error("Error sending password reset email:", error.message);
+      redirect(
+        "/reset-password?message=Unable to send password reset link email. Please try again."
+      );
       return {
         status: "error",
         message: "Could not send password reset email. Please try again later.",
       };
     }
 
-    redirect("/reset-password/thank-you?message=Password reset email sent.");
+    redirect(
+      "/reset-password/thank-you?message=Password reset email sent. Please check your inbox to continue the reset process."
+    );
 
     return {
       status: "success",
@@ -59,7 +64,7 @@ export default function Login({
         </SubmitButton>
 
         {searchParams?.message && (
-          <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
+          <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center bg-gray-200 rounded-md">
             {searchParams.message}
           </p>
         )}

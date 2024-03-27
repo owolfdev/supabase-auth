@@ -36,7 +36,7 @@ export async function GET(request: Request) {
     if (redirectType == "PASSWORD_RECOVERY") {
       return NextResponse.redirect(`${origin}/update-password`);
     } else {
-      return NextResponse.redirect(`${origin}/protected`);
+      return NextResponse.redirect(`${origin}`);
     }
   }
 

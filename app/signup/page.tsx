@@ -70,13 +70,7 @@ export default function Signup({
           placeholder="••••••••"
           required
         />
-        {/* <SubmitButton
-          formAction={signIn}
-          className="bg-green-700 rounded-md px-4 py-2 text-foreground mb-2"
-          pendingText="Signing In..."
-        >
-          Sign In
-        </SubmitButton> */}
+
         <SubmitButton
           formAction={signUp}
           className="bg-yellow-400 rounded-md px-4 py-2 text-foreground mb-2"
@@ -85,7 +79,7 @@ export default function Signup({
           Sign Up
         </SubmitButton>
         {searchParams?.message && (
-          <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
+          <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center bg-gray-200 rounded-md">
             {searchParams.message}
           </p>
         )}
