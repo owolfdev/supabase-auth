@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/dialog";
 
 import { Label } from "@/components/ui/label";
+import { revalidatePath } from "next/cache";
 
 export default async function ProfilePage({
   searchParams,
@@ -73,9 +74,33 @@ export default async function ProfilePage({
     };
   };
 
-  const deleteUserAccount = async (formData: FormData) => {
+  const deleteUserAccount = async () => {
     "use server";
-    console.log("delete user account");
+
+    const supabase = createClient();
+    const origin = headers().get("origin");
+
+    const { error } = await supabase
+      .from("profiles")
+      .update({
+        active: false,
+      })
+      .eq("id", user.id);
+
+    if (error) {
+      console.error("Error disabling account:", error.message);
+      return {
+        status: "error",
+        message: "Could not disable user.",
+      };
+    }
+
+    redirect(`/profile/disabled?message=Your account has been disabled.`);
+
+    return {
+      status: "success",
+      message: "Account disabled.",
+    };
   };
 
   const noAction = async (formData: FormData) => {
@@ -140,7 +165,7 @@ export default async function ProfilePage({
               </Button>
             </div>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
+          <DialogContent className="sm:max-w-[425px] max-w-[360px] rounded-lg">
             <DialogHeader>
               <DialogTitle>Delete User Account?</DialogTitle>
               <DialogDescription>
