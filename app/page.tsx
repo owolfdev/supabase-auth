@@ -1,14 +1,14 @@
 import DeployButton from "../components/DeployButton";
 import AuthButton from "../components/AuthButton";
 import { createClient } from "@/utils/supabase/server";
-import ConnectSupabaseSteps from "@/components/tutorial/ConnectSupabaseSteps";
-import SignUpUserSteps from "@/components/tutorial/SignUpUserSteps";
+
 import Header from "@/components/Header";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { revalidatePath } from "next/cache";
 import { SubmitButton } from "@/components/submit-button";
+import Loading from "@/app/loading";
 
 export default async function Index() {
   const supabase = createClient();
@@ -41,6 +41,7 @@ export default async function Index() {
 
   return (
     <div className="flex-1 flex flex-col w-full px-8 sm:max-w-lg gap-2 py-24">
+      <Loading />
       <h1 className="font-bold text-4xl pb-4 text-center">
         Supabase Auth Template
       </h1>

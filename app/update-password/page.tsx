@@ -13,6 +13,7 @@ export default async function UpdateUser({
 
   const changePassword = async (formData: FormData) => {
     "use server";
+    console.log("changePassword!");
     const origin = headers().get("origin");
     const email = formData.get("email") as string;
     const new_password = formData.get("password") as string;
@@ -37,8 +38,14 @@ export default async function UpdateUser({
       password: new_password,
     });
 
+    console.log("data: ", data);
+
     if (error) {
       console.error("Error changing password:", error.message);
+      redirect(
+        "/update-password?message=Could not change your password." +
+          error.message
+      );
       return {
         status: "error",
         message: "Could not change your password.",
