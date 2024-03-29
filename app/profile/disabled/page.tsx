@@ -3,7 +3,7 @@ import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { SubmitButton } from "@/app/login/submit-button";
+import { SubmitButton } from "@/components/submit-button";
 
 export default async function Disabled({
   searchParams,

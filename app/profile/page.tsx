@@ -5,7 +5,7 @@ import FetchDataSteps from "@/components/tutorial/FetchDataSteps";
 import Header from "@/components/Header";
 import { redirect } from "next/navigation";
 import { Input } from "@/components/ui/input";
-import { SubmitButton } from "./submit-button";
+import { SubmitButton } from "@/components/submit-button";
 import { headers } from "next/headers";
 import Link from "next/link";
 
