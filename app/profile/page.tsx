@@ -86,9 +86,11 @@ export default async function ProfilePage({
       data: { session },
     } = await supabaseServiceRollClient.auth.getSession();
 
-    console.log("supabaseServiceRollClient: ", supabaseServiceRollClient);
-    console.log("session: ", session);
-    console.log("userId: ", searchParams.userId);
+    // console.log("supabaseServiceRollClient: ", supabaseServiceRollClient);
+    // console.log("session: ", session);
+    // console.log("userId: ", searchParams.userId);
+
+    // redirect(`/login?message=Deleting your account.`);
 
     const { error } = await supabaseServiceRollClient.auth.admin.deleteUser(
       searchParams.userId
