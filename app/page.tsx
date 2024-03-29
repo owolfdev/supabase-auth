@@ -27,10 +27,16 @@ export default async function Index() {
     redirect("/login");
   }
 
+  // if (profile && !profile.active) {
+  //   redirect(
+  //     "/login?message=Your account has been disabled. Please contact support."
+  //   );
+  // }
+
   const test = async () => {
     "use server";
     console.log("test");
-    return redirect("/profile");
+    return redirect(`/profile?userId=` + user?.id);
   };
 
   return (

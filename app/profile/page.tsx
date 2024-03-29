@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { SubmitButton } from "@/components/submit-button";
 import { headers } from "next/headers";
 import Link from "next/link";
+import { createAdminServiceRoleClient } from "@/utils/supabase/service-role";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -27,7 +28,7 @@ import { revalidatePath } from "next/cache";
 export default async function ProfilePage({
   searchParams,
 }: {
-  searchParams: { message: string };
+  searchParams: { message: string; userId: string };
 }) {
   const supabase = createClient();
 
@@ -77,29 +78,27 @@ export default async function ProfilePage({
   const deleteUserAccount = async () => {
     "use server";
 
-    const supabase = createClient();
+    const supabaseServiceRollClient = createAdminServiceRoleClient();
+    // const supabase = createClient();
     const origin = headers().get("origin");
 
-    const { error } = await supabase
-      .from("profiles")
-      .update({
-        active: false,
-      })
-      .eq("id", user.id);
+    const {
+      data: { session },
+    } = await supabaseServiceRollClient.auth.getSession();
 
-    if (error) {
-      console.error("Error disabling account:", error.message);
-      return {
-        status: "error",
-        message: "Could not disable user.",
-      };
-    }
+    console.log("supabaseServiceRollClient: ", supabaseServiceRollClient);
+    console.log("session: ", session);
+    console.log("userId: ", searchParams.userId);
 
-    redirect(`/profile/disabled?message=Your account has been disabled.`);
+    const { error } = await supabaseServiceRollClient.auth.admin.deleteUser(
+      searchParams.userId
+    );
+
+    redirect(`/login?message=Congratulations. Your account has been deleted.`);
 
     return {
       status: "success",
-      message: "Account disabled.",
+      message: "Account deleted.",
     };
   };
 
@@ -169,8 +168,8 @@ export default async function ProfilePage({
             <DialogHeader>
               <DialogTitle>Delete User Account?</DialogTitle>
               <DialogDescription>
-                Are you sure you want to delete your account? This action is
-                irreversible.
+                <span className="font-bold">Wait!</span> Are you sure you want
+                to delete your account? This action is irreversible.
               </DialogDescription>
             </DialogHeader>
             <DialogFooter>
