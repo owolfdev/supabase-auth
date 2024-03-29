@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { revalidatePath } from "next/cache";
+import { SubmitButton } from "@/app/login/submit-button";
 
 export default async function Index() {
   const supabase = createClient();
@@ -22,22 +23,9 @@ export default async function Index() {
     .eq("id", user?.id)
     .single();
 
-  // if (profileError) {
-  //   // Handle error, for example, render a message indicating profile loading failed
-  //   return <div className="h-full">Error loading profile.</div>;
-  // }
-
   if (!user) {
     redirect("/login");
   }
-
-  // if (!profile.active) {
-  //   console.log("User is disabled");
-  //   redirect(
-  //     "/profile/disabled?message=Your account has been disabled. Please contact support."
-  //   );
-  // }
-
   return (
     <div className="flex-1 flex flex-col w-full px-8 sm:max-w-lg gap-2 py-24">
       <h1 className="font-bold text-4xl pb-4 text-center">
@@ -53,7 +41,9 @@ export default async function Index() {
             className={buttonVariants({ variant: "default", size: "lg" })}
             href="/profile"
           >
-            <span className="text-lg">Check out your profile page.</span>
+            <SubmitButton className="text-lg" pendingText="Loading...">
+              Check Out Your Profile Page.
+            </SubmitButton>
           </Link>
         </div>
       </div>
