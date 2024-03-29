@@ -1,8 +1,5 @@
-import DeployButton from "@/components/DeployButton";
-import AuthButton from "@/components/AuthButton";
 import { createClient } from "@/utils/supabase/server";
 
-import Header from "@/components/Header";
 import { redirect } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { SubmitButton } from "@/components/submit-button";
@@ -75,8 +72,12 @@ export default async function ProfilePage({
     };
   };
 
-  const deleteUserAccount = async () => {
+  const deleteUserAccount = async (formData: FormData) => {
     "use server";
+
+    console.log("delete user account");
+
+    const deleteInput = formData.get("delete") as string;
 
     const supabaseServiceRollClient = createAdminServiceRoleClient();
     // const supabase = createClient();
@@ -86,17 +87,22 @@ export default async function ProfilePage({
       data: { session },
     } = await supabaseServiceRollClient.auth.getSession();
 
-    // console.log("supabaseServiceRollClient: ", supabaseServiceRollClient);
-    // console.log("session: ", session);
-    // console.log("userId: ", searchParams.userId);
+    console.log("delete input", deleteInput);
 
-    // redirect(`/login?message=Deleting your account.`);
+    if (deleteInput !== "delete my account") {
+      return {
+        status: "error",
+        message: "Please type 'delete my account' to confirm deletion.",
+      };
+    } else {
+      const { error } = await supabaseServiceRollClient.auth.admin.deleteUser(
+        searchParams.userId
+      );
 
-    const { error } = await supabaseServiceRollClient.auth.admin.deleteUser(
-      searchParams.userId
-    );
-
-    redirect(`/login?message=Congratulations. Your account has been deleted.`);
+      redirect(
+        `/login?message=Congratulations. Your account has been deleted.`
+      );
+    }
 
     return {
       status: "success",
@@ -174,8 +180,16 @@ export default async function ProfilePage({
                 to delete your account? This action is irreversible.
               </DialogDescription>
             </DialogHeader>
-            <DialogFooter>
-              <form action={deleteUserAccount}>
+            <form action={deleteUserAccount}>
+              <div className="pb-8">
+                <Label htmlFor="delete">
+                  To proceed, type below: delete my account
+                </Label>
+                <div className="">
+                  <Input name="delete" placeholder="" />
+                </div>
+              </div>
+              <DialogFooter>
                 <div className="flex gap-4 items-center">
                   <Button formAction={noAction} variant="outline">
                     <DialogClose>Cancel</DialogClose>
@@ -189,9 +203,9 @@ export default async function ProfilePage({
                     </Button>
                   </DialogClose>
                 </div>
-              </form>
-            </DialogFooter>
-          </DialogContent>
+              </DialogFooter>{" "}
+            </form>
+          </DialogContent>{" "}
         </Dialog>
       </form>
     </div>
