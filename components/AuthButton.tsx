@@ -2,6 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Button, buttonVariants } from "@/components/ui/button";
+import { SubmitButton } from "@/app/login/submit-button";
 
 export default async function AuthButton() {
   const supabase = createClient();
@@ -22,7 +23,13 @@ export default async function AuthButton() {
     <div className="">
       {/* Hey, {user.email}! */}
       <form action={signOut}>
-        <Button>Logout</Button>
+        <SubmitButton
+          formAction={signOut}
+          className="bg-yellow-400 rounded-md px-4 py-2 text-foreground mb-2"
+          pendingText="Logging Out..."
+        >
+          Log out
+        </SubmitButton>
         {/* <button className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
           Logout
         </button> */}

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { SubmitButton } from "@/app/login/submit-button";
 
 export default async function Disabled({
   searchParams,
@@ -92,14 +93,13 @@ export default async function Disabled({
           >
             Return to Login page.
           </Button>
-          <Button
-            className="text-lg"
-            size="lg"
-            type="submit"
+          <SubmitButton
             formAction={reEnableAccount}
+            className="bg-yellow-400 rounded-md px-4 py-2 text-foreground mb-2"
+            pendingText="Reenableing account..."
           >
-            Reenable your account.
-          </Button>
+            Reenable Account
+          </SubmitButton>
         </form>
       </div>
     </div>
