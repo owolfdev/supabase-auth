@@ -31,12 +31,12 @@ export default async function Index() {
     redirect("/login");
   }
 
-  if (!profile.active) {
-    console.log("User is disabled");
-    redirect(
-      "/profile/disabled?message=Your account has been disabled. Please contact support."
-    );
-  }
+  // if (!profile.active) {
+  //   console.log("User is disabled");
+  //   redirect(
+  //     "/profile/disabled?message=Your account has been disabled. Please contact support."
+  //   );
+  // }
 
   return (
     <div className="flex-1 flex flex-col w-full px-8 sm:max-w-lg gap-2 py-24">
