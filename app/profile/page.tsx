@@ -89,20 +89,18 @@ export default async function ProfilePage({
 
     console.log("delete input", deleteInput);
 
-    if (deleteInput !== "delete my account") {
-      return {
-        status: "error",
-        message: "Please type 'delete my account' to confirm deletion.",
-      };
-    } else {
-      const { error } = await supabaseServiceRollClient.auth.admin.deleteUser(
-        searchParams.userId
-      );
+    // if (deleteInput !== "delete my account") {
+    //   redirect(
+    //     `/profile?userId=${searchParams.userId}message=Please type 'delete my account' to confirm deletion.`
+    //   );
+    // } else {
+    // }
 
-      redirect(
-        `/login?message=Congratulations. Your account has been deleted.`
-      );
-    }
+    const { error } = await supabaseServiceRollClient.auth.admin.deleteUser(
+      searchParams.userId
+    );
+
+    redirect(`/login?message=Congratulations. Your account has been deleted.`);
 
     return {
       status: "success",
@@ -180,20 +178,30 @@ export default async function ProfilePage({
                 to delete your account? This action is irreversible.
               </DialogDescription>
             </DialogHeader>
-            <form action={deleteUserAccount}>
-              <div className="pb-8">
-                <Label htmlFor="delete">
-                  To proceed, type below: delete my account
-                </Label>
-                <div className="">
-                  <Input name="delete" placeholder="" />
-                </div>
+
+            {/* <div className="pb-8 flex flex-col gap-4">
+              <Label htmlFor="delete">
+                To proceed, type below: delete my account
+              </Label>
+              <div className="">
+              
+                <Input
+                  type="text"
+                  id="delete"
+                  name="delete"
+                  pattern="OpenSesame"
+                  required
+                />
               </div>
-              <DialogFooter>
-                <div className="flex gap-4 items-center">
-                  <Button formAction={noAction} variant="outline">
-                    <DialogClose>Cancel</DialogClose>
-                  </Button>
+            </div> */}
+
+            <DialogFooter>
+              <div className="flex gap-4 items-center">
+                <Button formAction={noAction} variant="outline">
+                  <DialogClose>Cancel</DialogClose>
+                </Button>
+
+                <form action={deleteUserAccount}>
                   <DialogClose>
                     <Button
                       formAction={deleteUserAccount}
@@ -202,10 +210,10 @@ export default async function ProfilePage({
                       Delete This Account
                     </Button>
                   </DialogClose>
-                </div>
-              </DialogFooter>{" "}
-            </form>
-          </DialogContent>{" "}
+                </form>
+              </div>
+            </DialogFooter>
+          </DialogContent>
         </Dialog>
       </form>
     </div>
