@@ -42,7 +42,7 @@ export default async function UpdateUser({
 
     if (error) {
       console.error("Error changing password:", error.message);
-      redirect("/update-password" + error.message);
+      redirect("/update-password?message=" + error.message);
       return {
         status: "error",
         message: "Could not change your password.",
