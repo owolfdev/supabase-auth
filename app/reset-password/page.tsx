@@ -69,7 +69,7 @@ export default function Login({
           </p>
         )}
         <div className="text-center">
-          <Link href="/login">Cancel</Link>
+          <Link href="/profile">Cancel</Link>
         </div>
       </form>
     </div>
