@@ -39,8 +39,8 @@ export default async function UpdateUser({
     // console.log("sessionData: ", sessionData);
 
     if (!sessionData) {
-      // return redirect("/login?message=You need to log in first");
-      // console.log("You need to log in first");
+      console.log("You need to log in first");
+      return redirect("/login?message=You need to log in first");
     } else {
       // console.log("sessionData: ", sessionData);
     }
