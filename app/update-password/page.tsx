@@ -11,15 +11,10 @@ export default async function UpdateUser({
 }) {
   const supabase = createClient();
   const sessionData = await supabase.auth.getSession();
-  // const { data: user } = await supabase.auth.getUser();
 
-  // if (!user) {
-  //   return redirect("/login?message=You need to log in first");
-  // } else {
-  //   console.log("user: ", user);
-  // }
+  console.log("sessionData: ", sessionData);
 
-  if (!sessionData) {
+  if (sessionData.data.session === null) {
     return redirect("/login?message=You need to log in first");
   } else {
     // console.log("sessionData: ", sessionData);
@@ -36,11 +31,11 @@ export default async function UpdateUser({
 
     const sessionData = await supabase.auth.getSession();
 
-    // console.log("sessionData: ", sessionData);
+    console.log("sessionData: ", sessionData);
 
     if (!sessionData) {
       console.log("You need to log in first");
-      return redirect("/login?message=You need to log in first");
+      // return redirect("/login?message=You need to log in first");
     } else {
       // console.log("sessionData: ", sessionData);
     }
@@ -111,7 +106,7 @@ export default async function UpdateUser({
           </p>
         )}
         <div className="text-center">
-          <Link href="/login">Cancel</Link>
+          <Link href="/profile">Cancel</Link>
         </div>
       </form>
     </div>
