@@ -30,7 +30,7 @@ export default async function UpdateUser({
     }
 
     if (new_password !== confirmPassword) {
-      return redirect("/update-password?message=Passwords do not match");
+      return redirect("/update-password?message=Passwords do not match.");
     }
 
     const { data, error } = await supabase.auth.updateUser({
@@ -42,10 +42,7 @@ export default async function UpdateUser({
 
     if (error) {
       console.error("Error changing password:", error.message);
-      redirect(
-        "/update-password?message=Could not change your password." +
-          error.message
-      );
+      redirect("/update-password" + error.message);
       return {
         status: "error",
         message: "Could not change your password.",
