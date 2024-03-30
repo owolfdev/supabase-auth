@@ -64,7 +64,7 @@ export default async function ProfilePage({
       };
     }
 
-    redirect(`/profile?message=Thank You ${username}.`);
+    redirect(`/profile?message=Your user name has been updated ${username}.`);
 
     return {
       status: "success",
