@@ -9,7 +9,21 @@ export default async function UpdateUser({
 }: {
   searchParams: { code: string; message: string };
 }) {
-  console.log("code: ", searchParams.code);
+  const supabase = createClient();
+  const sessionData = await supabase.auth.getSession();
+  // const { data: user } = await supabase.auth.getUser();
+
+  // if (!user) {
+  //   return redirect("/login?message=You need to log in first");
+  // } else {
+  //   console.log("user: ", user);
+  // }
+
+  if (!sessionData) {
+    return redirect("/login?message=You need to log in first");
+  } else {
+    // console.log("sessionData: ", sessionData);
+  }
 
   const changePassword = async (formData: FormData) => {
     "use server";
@@ -21,6 +35,8 @@ export default async function UpdateUser({
     const supabase = createClient();
 
     const sessionData = await supabase.auth.getSession();
+
+    // console.log("sessionData: ", sessionData);
 
     if (!sessionData) {
       // return redirect("/login?message=You need to log in first");

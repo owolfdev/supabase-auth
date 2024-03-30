@@ -155,7 +155,7 @@ export default async function ProfilePage({
           )}
 
           <div className="">
-            <Link href="/reset-password">Reset your account password.</Link>
+            <Link href="/update-password">Reset your account password.</Link>
           </div>
           <div></div>
         </div>
