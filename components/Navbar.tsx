@@ -13,7 +13,9 @@ const NavBar: React.FC<NavBarProps> = ({ className }) => {
       <div className="text-bold text-xl">
         <Link href="/">Supabase Auth</Link>
       </div>
-      <AuthButton />
+      <div className="">
+        <AuthButton />
+      </div>
     </nav>
   );
 };

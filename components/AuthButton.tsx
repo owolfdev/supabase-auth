@@ -21,24 +21,20 @@ export default async function AuthButton() {
 
   return user ? (
     <div className="">
-      {/* Hey, {user.email}! */}
       <form action={signOut}>
         <SubmitButton
           formAction={signOut}
-          className="bg-yellow-400 rounded-md px-4 py-2 text-foreground mb-2 "
+          className="bg-yellow-400 rounded-md px-4 py-2 text-foreground"
           pendingText="Logging Out..."
         >
           Log out
         </SubmitButton>
-        {/* <button className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
-          Logout
-        </button> */}
       </form>
     </div>
   ) : (
     <div className="">
       <Link href="/login">
-        <SubmitButton className="bg-yellow-400 rounded-md px-4 py-2 text-foreground mb-2 ">
+        <SubmitButton className="bg-yellow-400 rounded-md px-4 py-2 text-foreground">
           Log In
         </SubmitButton>
       </Link>
