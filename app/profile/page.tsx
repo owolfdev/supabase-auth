@@ -64,7 +64,7 @@ export default async function ProfilePage({
       };
     }
 
-    redirect(`/profile?message=Your user name has been updated ${username}.`);
+    redirect(`/profile?message=Your user name has been updated ${username}!`);
 
     return {
       status: "success",
@@ -142,7 +142,7 @@ export default async function ProfilePage({
             <SubmitButton
               formAction={updateUserName}
               className="bg-yellow-400 rounded-md px-4 py-2 text-foreground mt-2"
-              pendingText="Sending Reset Link..."
+              pendingText="Updating User Name..."
             >
               Update User Name
             </SubmitButton>
