@@ -9,8 +9,8 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Next.js and Supabase Authentication",
-  description: "Authentication with Supabase and Next.js",
+  title: "Supabase Authentication and Next.js",
+  description: "Authentication example app with Supabase Auth and Next.js",
 };
 
 export default function RootLayout({

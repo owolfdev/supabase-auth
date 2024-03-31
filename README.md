@@ -1,3 +1,7 @@
+# Supabase Authentication With Next.js example
+
+[Deployed here:](https://supabase-auth-red.vercel.app/)
+
 Installation
 
 ### Step 1: Clone the Repository
