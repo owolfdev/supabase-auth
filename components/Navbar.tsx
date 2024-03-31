@@ -1,5 +1,3 @@
-// "use client";
-
 import AuthButton from "./AuthButton";
 import Link from "next/link";
 

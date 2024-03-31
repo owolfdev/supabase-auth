@@ -21,9 +21,6 @@ export async function GET(request: Request) {
 
   if (code) {
     const supabase = createClient();
-    // const { data: session, error } = await supabase.auth.exchangeCodeForSession(
-    //   code
-    // );
 
     const result = (await supabase.auth.exchangeCodeForSession(
       code
