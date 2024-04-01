@@ -51,11 +51,23 @@ Installation
 5. Import and deploy your project.
 6. Be sure to add environment variables as needed.
 
-### Notes
+### Supabase Setup
 
-There are many setting on Supabase that you need to consider. Many to mention.
+There are several setting at Supabase that you need to consider.
 
-You will need to create a `profiles` table.
+You will need to create a `profiles` table with the following (suggested) table schema:
+
+- id (UUID): Unique identifier for each user
+- name (String): Name of the user
+- email (String): Email address of the user
+- phone (String): Phone number of the user
+- avatar_url (String): URL to the user's avatar image
+- description (String): Description or bio of the user
+- subscription (String): Subscription details of the user
+- website (String): Website URL of the user
+- website_description (String): Description of the user's website
+- location (String): Location of the user
+- active (Boolean): Indicates whether the user is currently active or not
 
 You should create a database function that creates a new profile based on a new auth.user account.
 
@@ -81,7 +93,7 @@ FOR EACH ROW
 EXECUTE FUNCTION public.handle_new_user();
 ```
 
-I am using Resend as the Custom SMTP server to bypass the Supabase email limit of 3 per hour. You can find the SMTP settings in Supabase under `Settings` > `Authentication` > `SMTP Settings`.
+I am using [Resend](https://resend.com/) as the Custom SMTP server to bypass the Supabase email limit of 3 per hour. You can find the SMTP settings in Supabase under `Settings` > `Authentication` > `SMTP Settings`.
 
 At supabase you will need to set the project url at `Authentication` > `Site URL` to enable your app to redirect users back to your site.
 
