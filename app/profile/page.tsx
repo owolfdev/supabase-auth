@@ -4,6 +4,8 @@ import { SubmitButton } from "@/components/submit-button";
 import { headers } from "next/headers";
 import Link from "next/link";
 import { createAdminServiceRoleClient } from "@/utils/supabase/service-role";
+import Image from "next/image";
+import AvatarUploader from "./avatar";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -114,6 +116,10 @@ export default async function ProfilePage({
   return (
     <div className="flex-1 flex flex-col w-full px-8 sm:max-w-lg gap-2 py-24">
       <h1 className="font-bold text-4xl pb-4">Profile Page</h1>
+      <div>
+        {/* avatar */}
+        <AvatarUploader />
+      </div>
       <div>
         <span className="font-bold">User name:</span>{" "}
         {profile?.name || "no name given"}
