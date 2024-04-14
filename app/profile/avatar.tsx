@@ -4,12 +4,14 @@ import { uploadImageToServer, logOutFromSupabase } from "./actions";
 import { createClient } from "@/utils/supabase/client";
 import Link from "next/link";
 import Image from "next/image";
+import { revalidatePath } from "next/cache";
 
 export default function AvatarUploader() {
   let [isPending, startTransition] = useTransition();
   const [loggingOut, setLoggingOut] = useState(false);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [user, setUser] = useState<any>(null);
+  const [selectedFileName, setSelectedFileName] = useState(null);
 
   useEffect(() => {
     if (isPending) return;
@@ -39,18 +41,33 @@ export default function AvatarUploader() {
     startTransition(() => {
       uploadImageToServer(formData);
     });
+    setSelectedFileName(null);
   };
 
-  const logOutAction = async () => {
-    await logOutFromSupabase();
+  const handleInputImage = (e: any) => {
+    console.log("file input", e.target.files[0]);
+    const file = e.target.files[0];
+    setSelectedFileName(file.name);
+    const fileSize = file.size / 1024 / 1024; // Convert bytes to megabytes
+    const fileSizeRounded = parseFloat(fileSize.toFixed(1));
+    if (fileSize > 1) {
+      // Check if the file size is more than 1 MB
+      setSelectedFileName(null);
+      alert(
+        `Error: The file size is over 1 megabyte. It's ${fileSizeRounded}MB. Please upload a smaller file.`
+      );
+    }
   };
 
   return (
-    <div className="z-10 max-w-xl w-full  justify-between flex flex-col gap-4 font-mono">
+    <div className="z-10 max-w-xl w-full justify-between flex flex-col pb-8">
       {/* <h1 className="text-4xl font-bold text-center">Image Uploader</h1> */}
       {/* <p className="text-center">
           This is an uploader for images built with Next.js and Supabase.{" "}
         </p> */}
+      <p>
+        <span className="font-bold">Avatar Image</span> (Max size 1MB)
+      </p>
       <div className=" w-80 h-80 border border-black rounded relative">
         {imageUrl ? (
           <Image
@@ -71,18 +88,38 @@ export default function AvatarUploader() {
           </div>
         )}
       </div>
-      <form action={uploadAction} className="flex flex-col gap-4 pt-4">
-        <input type="file" name="file" />
-
-        <button
-          type="submit"
-          className="border border-black rounded  py-1 px-2 hover:bg-gray-300"
-          onClick={() => {
-            setImageUrl(null);
-          }}
-        >
-          {isPending ? "uploading..." : "upload"}{" "}
-        </button>
+      <form action={uploadAction} className="flex flex-col gap-2 pt-4">
+        {/* <input type="file" name="file" onChange={handleInputImage} /> */}
+        <div>
+          <label
+            htmlFor="file-upload"
+            className="bg-yellow-400 rounded-md px-4 py-2 text-foreground mt-2"
+          >
+            {!selectedFileName
+              ? `Select New Avatar Image`
+              : `${selectedFileName}`}
+          </label>
+          <input
+            id="file-upload"
+            type="file"
+            name="file"
+            onChange={handleInputImage}
+            className="hidden"
+          />
+        </div>
+        <div>
+          {selectedFileName && (
+            <button
+              type="submit"
+              className="bg-yellow-400 rounded-md px-4 py-2 text-foreground mt-2"
+              onClick={() => {
+                setImageUrl(null);
+              }}
+            >
+              {isPending ? "Uploading..." : `Upload Image`}
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );

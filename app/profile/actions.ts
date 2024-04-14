@@ -2,6 +2,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import sharp from "sharp";
+import { revalidatePath } from "next/cache";
 
 const IMAGE_SIZE = 600;
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -16,6 +17,7 @@ export const uploadImageToServer = async (formData: FormData) => {
     if (!user) throw new Error("Authentication failed");
 
     const file = formData.get("file") as File;
+
     const resizedImage = await resizeImage(file);
 
     const fileName = file.name.split(".")[0];
@@ -36,6 +38,7 @@ export const uploadImageToServer = async (formData: FormData) => {
 
     const avatarUrl = `${SUPABASE_URL}/storage/v1/object/public/avatars/${data.path}`;
     await updateUserProfile(user.id, avatarUrl, supabase);
+    revalidatePath("/");
   } catch (error) {
     console.error("Failed to upload image:", error);
   }

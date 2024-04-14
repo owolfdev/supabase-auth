@@ -80,21 +80,12 @@ export default async function ProfilePage({
     const deleteInput = formData.get("delete") as string;
 
     const supabaseServiceRollClient = createAdminServiceRoleClient();
-    // const supabase = createClient();
-    const origin = headers().get("origin");
 
     const {
       data: { session },
     } = await supabaseServiceRollClient.auth.getSession();
 
     console.log("delete input", deleteInput);
-
-    // if (deleteInput !== "delete my account") {
-    //   redirect(
-    //     `/profile?userId=${searchParams.userId}message=Please type 'delete my account' to confirm deletion.`
-    //   );
-    // } else {
-    // }
 
     const { error } = await supabaseServiceRollClient.auth.admin.deleteUser(
       searchParams.userId

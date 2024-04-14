@@ -3,6 +3,16 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { SubmitButton } from "@/components/submit-button";
+import Image from "next/image";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Divide } from "lucide-react";
 
 export default async function AuthButton() {
   const supabase = createClient();
@@ -10,6 +20,12 @@ export default async function AuthButton() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select()
+    .eq("id", user?.id)
+    .single();
 
   const signOut = async () => {
     "use server";
@@ -19,17 +35,49 @@ export default async function AuthButton() {
     return redirect("/login");
   };
 
+  const navigate = async () => {
+    "use server";
+    return redirect("/profile");
+  };
+
+  const userEmail = user?.email;
+
   return user ? (
     <div className="">
-      <form action={signOut}>
-        <SubmitButton
-          formAction={signOut}
-          className="bg-yellow-400 rounded-md px-4 py-2 text-foreground"
-          pendingText="Logging Out..."
-        >
-          Log out
-        </SubmitButton>
-      </form>
+      <DropdownMenu>
+        <DropdownMenuTrigger>
+          {profile?.avatar_url ? (
+            <Image
+              alt="avatar"
+              src={profile.avatar_url}
+              width={40}
+              height={40}
+              className="rounded-full mt-2"
+            />
+          ) : (
+            <div className="bg-yellow-400 rounded-full h-10 w-10 text-foreground mt-2 flex items-center text-center">
+              <div className="w-full text-2xl capitalize">
+                {(userEmail && userEmail[0]) || ""}
+              </div>
+            </div>
+          )}
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem>
+            <form action={navigate}>
+              {/* <Link href="/profile">Profile</Link> */}
+              <button type="submit">Profile</button>
+            </form>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <form action={signOut}>
+              <SubmitButton title="log out" formAction={signOut}>
+                Log Out
+              </SubmitButton>
+            </form>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
   ) : (
     <div className="">

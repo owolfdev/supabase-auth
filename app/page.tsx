@@ -9,6 +9,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { revalidatePath } from "next/cache";
 import { SubmitButton } from "@/components/submit-button";
 import Loading from "@/app/loading";
+import Image from "next/image";
 
 export default async function Index() {
   const supabase = createClient();
@@ -40,14 +41,22 @@ export default async function Index() {
   };
 
   return (
-    <div className="flex-1 flex flex-col w-full px-8 sm:max-w-lg gap-2 py-24">
+    <div className="flex-1 flex flex-col w-full px-8 sm:max-w-lg gap-2 pt-24">
       {/* <Loading /> */}
       <h1 className="font-bold text-4xl pb-4 text-center">
         Supabase Auth Template
       </h1>
-      <div className="flex-1 w-full flex flex-col gap-20 items-center">
+      <div className="flex-1 w-full flex flex-col gap-10 items-center">
         <div className="flex flex-col gap-4 items-center">
-          <p className="text-lg">Hello {profile?.name || user?.email}!</p>{" "}
+          <p className="text-lg">Hello {profile?.name || user?.email}!</p>
+          {profile?.avatar_url && (
+            <Image
+              src={profile?.avatar_url}
+              width={300}
+              height={300}
+              alt="avatar image"
+            />
+          )}
           <p>You are logged in.</p>
         </div>
         <div>
