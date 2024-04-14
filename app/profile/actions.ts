@@ -22,11 +22,37 @@ export const uploadImageToServer = async (formData: FormData) => {
     const timestamp = Math.floor(Date.now() / 1000);
     const filePath = `${user.id}/${timestamp}_${fileName}.jpg`;
 
+    // Delete the previous avatar
+    const avatarURlData = await supabase
+      .from("profiles")
+      .select("avatar_url")
+      .eq("id", user.id);
+
+    // console.log("avatar url", avatarURlData.data?.[0]);
+    const avatarURlFullPath = avatarURlData.data?.[0].avatar_url;
+    const avatarURl = avatarURlFullPath.substring(
+      "https://bnjiafgkkggnrizljoso.supabase.co/storage/v1/object/public/avatars/"
+        .length
+    );
+
+    console.log("avatar url", avatarURl);
+
+    if (avatarURl) {
+      // const { data, error } = await supabase.storage.emptyBucket("avatars");
+      // if (error) console.error("error", error);
+      const { data, error } = await supabase.storage.listBuckets();
+      if (error) console.error("error", error);
+      console.log("buckets:", data);
+    }
+
     const { data, error } = await supabase.storage
       .from("avatars")
       .upload(filePath, resizedImage);
 
     if (error) throw error;
+
+    if (!data.path) throw new Error("Failed to upload image");
+    // console.log("Image uploaded:", data.path);
 
     const avatarUrl = `${SUPABASE_URL}/storage/v1/object/public/avatars/${data.path}`;
     await updateUserProfile(user.id, avatarUrl, supabase);
