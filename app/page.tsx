@@ -1,8 +1,8 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import { SubmitButton } from "@/components/submit-button";
 import Image from "next/image";
 import Link from "next/link";
+import { revalidatePath } from "next/cache";
 
 export default async function Index() {
   const supabase = createClient();
@@ -18,12 +18,9 @@ export default async function Index() {
 
   if (!user) {
     redirect("/login");
+  } else {
+    // revalidatePath("/");
   }
-
-  const goToProfilePage = async () => {
-    "use server";
-    return redirect(`/profile`);
-  };
 
   return (
     <div className="flex-1 flex flex-col w-full px-8 sm:max-w-lg gap-2 pt-24">
@@ -44,15 +41,6 @@ export default async function Index() {
           <p>You are logged in.</p>
         </div>
         <div>
-          {/* <form action="">
-            <SubmitButton
-              formAction={goToProfilePage}
-              className="bg-yellow-400 rounded-md px-4 py-2 text-foreground mb-2 text-lg"
-              pendingText="Check Out Profile Page..."
-            >
-              Check Out Profile Page.
-            </SubmitButton>
-          </form> */}
           <Link
             className="bg-yellow-400 rounded-md px-4 py-2 text-foreground mb-2 text-lg"
             href="/profile"

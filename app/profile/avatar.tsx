@@ -1,10 +1,8 @@
 "use client";
 import { useTransition, useEffect, useState } from "react";
-import { uploadImageToServer, logOutFromSupabase } from "./actions";
+import { uploadImageToServer } from "@/actions/actions";
 import { createClient } from "@/utils/supabase/client";
-import Link from "next/link";
 import Image from "next/image";
-import { revalidatePath } from "next/cache";
 
 export default function AvatarUploader() {
   let [isPending, startTransition] = useTransition();

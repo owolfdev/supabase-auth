@@ -76,6 +76,7 @@ export const logOutFromSupabase = async () => {
   } catch (error) {
     console.error("Logout error:", error);
   } finally {
+    revalidatePath("/");
     redirect("/login");
   }
 };

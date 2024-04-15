@@ -2,6 +2,7 @@ import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { SubmitButton } from "@/components/submit-button";
+import { revalidatePath } from "next/cache";
 
 export default async function Login({
   searchParams,
@@ -15,6 +16,7 @@ export default async function Login({
   } = await supabase.auth.getUser();
 
   if (user) {
+    revalidatePath("/");
     return redirect("/");
   }
 
@@ -34,6 +36,7 @@ export default async function Login({
       return redirect("/login?message=Could not authenticate user");
     }
 
+    revalidatePath("/");
     return redirect("/");
   };
 
