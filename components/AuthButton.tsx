@@ -64,10 +64,10 @@ export default async function AuthButton() {
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem>
-            <form action={navigate}>
-              {/* <Link href="/profile">Profile</Link> */}
+            {/* <form action={navigate}>
               <button type="submit">Profile</button>
-            </form>
+            </form> */}
+            <Link href="/profile">Profile</Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <form action={signOut}>
