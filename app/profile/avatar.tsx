@@ -61,10 +61,6 @@ export default function AvatarUploader() {
 
   return (
     <div className="z-10 max-w-xl w-full justify-between flex flex-col pb-8">
-      {/* <h1 className="text-4xl font-bold text-center">Image Uploader</h1> */}
-      {/* <p className="text-center">
-          This is an uploader for images built with Next.js and Supabase.{" "}
-        </p> */}
       <p>
         <span className="font-bold">Avatar Image</span> (Max size 1MB)
       </p>
@@ -89,11 +85,10 @@ export default function AvatarUploader() {
         )}
       </div>
       <form action={uploadAction} className="flex flex-col gap-2 pt-4">
-        {/* <input type="file" name="file" onChange={handleInputImage} /> */}
         <div>
           <label
             htmlFor="file-upload"
-            className="bg-yellow-400 rounded-md px-4 py-2 text-foreground mt-2"
+            className="bg-yellow-400 rounded-md px-4 py-2 text-foreground mt-2 cursor-pointer"
           >
             {!selectedFileName
               ? `Select New Avatar Image`
