@@ -25,6 +25,11 @@ export default async function Index() {
     return redirect(`/profile?userId=` + user?.id);
   };
 
+  const goToProfilePage = async () => {
+    "use server";
+    return redirect(`/profile`);
+  };
+
   return (
     <div className="flex-1 flex flex-col w-full px-8 sm:max-w-lg gap-2 pt-24">
       <h1 className="font-bold text-4xl pb-4 text-center">
@@ -46,7 +51,7 @@ export default async function Index() {
         <div>
           <form action="">
             <SubmitButton
-              formAction={test}
+              formAction={goToProfilePage}
               className="bg-yellow-400 rounded-md px-4 py-2 text-foreground mb-2 text-lg"
               pendingText="Check Out Profile Page..."
             >
