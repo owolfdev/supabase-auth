@@ -71,9 +71,9 @@ export default async function AuthButton() {
           </DropdownMenuItem>
           <DropdownMenuItem>
             <form action={signOut}>
-              <SubmitButton title="log out" formAction={signOut}>
+              <button title="log out" formAction={signOut}>
                 Log Out
-              </SubmitButton>
+              </button>
             </form>
           </DropdownMenuItem>
         </DropdownMenuContent>
