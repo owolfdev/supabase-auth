@@ -99,6 +99,26 @@ export default async function ProfilePage({
     };
   };
 
+  const signOut = async (formData: FormData) => {
+    "use server";
+    const supabase = createClient();
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error("Error logging out:", error.message);
+      return {
+        status: "error",
+        message: "Could not log out.",
+      };
+    }
+
+    redirect("/login");
+
+    return {
+      status: "success",
+      message: "Logged out.",
+    };
+  };
+
   const noAction = async (formData: FormData) => {
     "use server";
     console.log("no action");
@@ -157,6 +177,39 @@ export default async function ProfilePage({
           <div></div>
         </div>
       </form>
+      <form action={noAction}>
+        {" "}
+        <Dialog>
+          <DialogTrigger asChild>
+            <div>
+              <Button formAction={noAction}>Log Out</Button>
+            </div>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[425px] max-w-[360px] rounded-lg">
+            <DialogHeader>
+              <DialogTitle>Log Out?</DialogTitle>
+              <DialogDescription>
+                Are you sure you want to log out?
+              </DialogDescription>
+            </DialogHeader>
+
+            <DialogFooter>
+              <div className="flex gap-4 items-center">
+                <Button formAction={noAction} variant="outline">
+                  <DialogClose>Cancel</DialogClose>
+                </Button>
+
+                <form action={signOut}>
+                  <DialogClose>
+                    <Button formAction={signOut}>Log Out</Button>
+                  </DialogClose>
+                </form>
+              </div>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </form>
+      {/* delete user account */}
       <form action={noAction}>
         {" "}
         <Dialog>

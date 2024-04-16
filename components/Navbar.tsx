@@ -42,7 +42,7 @@ const NavBar: React.FC<NavBarProps> = ({ className }) => {
         >
           Github Repo
         </Link>
-        <form>
+        {/* <form>
           <SubmitButtonTest
             formAction={signOut}
             className="bg-yellow-400 rounded-md px-4 py-2 text-foreground mt-2"
@@ -50,7 +50,7 @@ const NavBar: React.FC<NavBarProps> = ({ className }) => {
           >
             Log Out
           </SubmitButtonTest>
-        </form>
+        </form> */}
         <AuthComponent />
       </div>
     </nav>

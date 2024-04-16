@@ -74,14 +74,14 @@ export default async function AuthComponent() {
           <Link href="/profile">
             <DropdownMenuItem>Profile</DropdownMenuItem>
           </Link>
-          <DropdownMenuItem>
+          {/* <DropdownMenuItem>
             <form action="">
               <button title="log out" formAction={signOut}>
-                {/* <AuthChangeIndicator /> */}
+               
                 Log Out
               </button>
             </form>
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
