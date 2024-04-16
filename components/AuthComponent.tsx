@@ -1,7 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { Button, buttonVariants } from "@/components/ui/button";
 import { SubmitButton } from "@/components/submit-button";
 import Image from "next/image";
 import {
@@ -12,9 +11,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Divide } from "lucide-react";
+import AuthTest from "./AuthTest";
 
-export default async function AuthButton() {
+export default async function AuthComponent() {
   const supabase = createClient();
 
   const {
@@ -27,11 +26,16 @@ export default async function AuthButton() {
     .eq("id", user?.id)
     .single();
 
-  const signOut = async () => {
+  const signOut = async (): Promise<void> => {
     "use server";
 
     const supabase = createClient();
-    await supabase.auth.signOut();
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error("Error logging out:", error.message);
+      return;
+    }
+
     return redirect("/login");
   };
 
@@ -58,17 +62,16 @@ export default async function AuthButton() {
           )}
         </DropdownMenuTrigger>
         <DropdownMenuContent>
+          <Link href="/">
+            <DropdownMenuItem>Home</DropdownMenuItem>
+          </Link>
+          <Link href="/profile">
+            <DropdownMenuItem>Profile</DropdownMenuItem>
+          </Link>
           <DropdownMenuItem>
-            {/* <form action={navigate}>
-              <button type="submit">Profile</button>
-            </form> */}
-            <Link href="/profile">Profile</Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            {/* <Link href="/logout">Log Out</Link> */}
-            <form>
+            <form action="">
               <button title="log out" formAction={signOut}>
-                Log Out
+                <AuthTest />
               </button>
             </form>
           </DropdownMenuItem>

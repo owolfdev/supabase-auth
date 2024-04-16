@@ -1,4 +1,7 @@
-import AuthButton from "./AuthButton";
+// import AuthButton from "./AuthButton";
+import AuthComponent from "./AuthComponent";
+import AuthComponentClient from "./AuthComponent_client";
+import AuthLogoutComponent from "./AuthLogoutComponent";
 import Link from "next/link";
 
 type NavBarProps = {
@@ -21,7 +24,8 @@ const NavBar: React.FC<NavBarProps> = ({ className }) => {
         >
           Github Repo
         </Link>
-        <AuthButton />
+        {/* <AuthComponentClient /> */}
+        <AuthComponent />
       </div>
     </nav>
   );
