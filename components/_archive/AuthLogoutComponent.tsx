@@ -1,5 +1,5 @@
 import React from "react";
-import { SubmitButtonDropdown } from "../submit-button-dropdown";
+import { SubmitButtonDropdown } from "./submit-button-dropdown";
 import test from "node:test";
 import { logOutFromSupabase } from "@/actions/actions";
 import { revalidatePath } from "next/cache";

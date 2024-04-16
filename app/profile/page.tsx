@@ -134,6 +134,7 @@ export default async function ProfilePage({
               placeholder="New user name"
               required
             />
+            {/* Update user name */}
             <SubmitButton
               formAction={updateUserName}
               className="bg-yellow-400 rounded-md px-4 py-2 text-foreground mt-2"
@@ -141,6 +142,7 @@ export default async function ProfilePage({
             >
               Update User Name
             </SubmitButton>
+            {/* update user name */}
           </div>
 
           {searchParams?.message && (
@@ -173,22 +175,6 @@ export default async function ProfilePage({
                 to delete your account? This action is irreversible.
               </DialogDescription>
             </DialogHeader>
-
-            {/* <div className="pb-8 flex flex-col gap-4">
-              <Label htmlFor="delete">
-                To proceed, type below: delete my account
-              </Label>
-              <div className="">
-              
-                <Input
-                  type="text"
-                  id="delete"
-                  name="delete"
-                  pattern="OpenSesame"
-                  required
-                />
-              </div>
-            </div> */}
 
             <DialogFooter>
               <div className="flex gap-4 items-center">

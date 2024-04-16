@@ -2,7 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { revalidatePath } from "next/cache";
+import { SubmitButtonTest } from "@/components/submit-button-test";
 
 export default async function Index() {
   const supabase = createClient();
