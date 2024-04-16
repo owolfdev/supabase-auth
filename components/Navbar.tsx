@@ -1,7 +1,7 @@
 // import AuthButton from "./AuthButton";
 import AuthComponent from "./AuthComponent";
-import AuthComponentClient from "./AuthComponent_client";
-import AuthLogoutComponent from "./AuthLogoutComponent";
+import AuthComponentClient from "./_archive/AuthComponent_client";
+import AuthLogoutComponent from "./_archive/AuthLogoutComponent";
 import Link from "next/link";
 
 type NavBarProps = {
