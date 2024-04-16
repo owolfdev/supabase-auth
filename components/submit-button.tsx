@@ -16,8 +16,6 @@ export function SubmitButton({ children, pendingText, ...props }: Props) {
   //   console.log("action", action);
   //   console.log("props.formAction", props.formAction);
   //   console.log("props", props);
-  //   console.log("children", children);
-  //   console.log("pendingText", pendingText);
   //   console.log("pendingText", pendingText);
   //   console.log("children", children);
   // }, [pending, children, pendingText, props.formAction, props]);
