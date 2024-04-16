@@ -1,7 +1,5 @@
 // import AuthButton from "./AuthButton";
 import AuthComponent from "./AuthComponent";
-import AuthComponentClient from "./_archive/AuthComponent_client";
-import AuthLogoutComponent from "./_archive/AuthLogoutComponent";
 import Link from "next/link";
 import { SubmitButtonTest } from "@/components/_archive/submit-button-test";
 import { logOutFromSupabase } from "@/actions/actions";
