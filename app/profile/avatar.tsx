@@ -58,7 +58,7 @@ export default function AvatarUploader() {
   };
 
   return (
-    <div className="z-10 max-w-xl w-full justify-between flex flex-col pb-8">
+    <div className="z-10 max-w-xl w-full justify-between flex flex-col ">
       <p>
         <span className="font-bold">Avatar Image</span> (Max size 1MB)
       </p>

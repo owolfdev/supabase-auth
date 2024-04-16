@@ -3,7 +3,7 @@ import AuthComponent from "./AuthComponent";
 import AuthComponentClient from "./_archive/AuthComponent_client";
 import AuthLogoutComponent from "./_archive/AuthLogoutComponent";
 import Link from "next/link";
-import { SubmitButtonTest } from "@/components/submit-button-test";
+import { SubmitButtonTest } from "@/components/_archive/submit-button-test";
 import { logOutFromSupabase } from "@/actions/actions";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";

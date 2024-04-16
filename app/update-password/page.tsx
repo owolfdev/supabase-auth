@@ -3,6 +3,7 @@ import { headers } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { SubmitButton } from "@/components/submit-button";
+import { buttonVariants } from "@/components/ui/button";
 
 export default async function UpdateUser({
   searchParams,
@@ -105,8 +106,13 @@ export default async function UpdateUser({
             {searchParams.message}
           </p>
         )}
-        <div className="text-center">
-          <Link href="/profile">Cancel</Link>
+        <div className="text-center pt-4">
+          <Link
+            className={buttonVariants({ variant: "outline", size: "lg" })}
+            href="/profile"
+          >
+            Cancel
+          </Link>
         </div>
       </form>
     </div>

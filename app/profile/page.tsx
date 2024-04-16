@@ -125,131 +125,138 @@ export default async function ProfilePage({
   };
 
   return (
-    <div className="flex-1 flex flex-col w-full px-8 sm:max-w-lg gap-2 py-24">
+    <div className="flex-1 flex flex-col w-full px-8 sm:max-w-lg gap-8 py-24">
       <h1 className="font-bold text-4xl pb-4">Profile Page</h1>
       <div>
         {/* avatar */}
         <AvatarUploader />
       </div>
+      {/* info */}
       <div>
-        <span className="font-bold">User name:</span>{" "}
-        {profile?.name || "no name given"}
-      </div>
-      <div>
-        <span className="font-bold">User email:</span> {user.email}
-      </div>
-      <div>
-        <span className="font-bold">User id:</span> {user.id}
-      </div>
-
-      <form className="animate-in flex-1 flex flex-col w-full gap-2 text-foreground pt-8">
-        <div className="flex flex-col gap-8">
-          <div className="flex flex-col gap-2">
-            <label className="text-md" htmlFor="email">
-              Update your user name.
-            </label>
-            <input
-              className="rounded-md px-4 py-2 bg-inherit border"
-              name="username"
-              placeholder="New user name"
-              required
-            />
-            {/* Update user name */}
-            <SubmitButton
-              formAction={updateUserName}
-              className="bg-yellow-400 rounded-md px-4 py-2 text-foreground mt-2"
-              pendingText="Updating User Name..."
-            >
-              Update User Name
-            </SubmitButton>
-            {/* update user name */}
-          </div>
-
-          {searchParams?.message && (
-            <p className=" p-4 bg-foreground/10 text-foreground text-center bg-gray-200 rounded-md">
-              {searchParams.message}
-            </p>
-          )}
-
-          <div className="">
-            <Link href="/update-password">Reset your account password.</Link>
-          </div>
-          <div></div>
+        <div>
+          <span className="font-bold">User name:</span>{" "}
+          {profile?.name || "no name given"}
         </div>
-      </form>
-      <form action={noAction}>
-        {" "}
-        <Dialog>
-          <DialogTrigger asChild>
-            <div>
-              <Button formAction={noAction}>Log Out</Button>
-            </div>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px] max-w-[360px] rounded-lg">
-            <DialogHeader>
-              <DialogTitle>Log Out?</DialogTitle>
-              <DialogDescription>
-                Are you sure you want to log out?
-              </DialogDescription>
-            </DialogHeader>
+        <div>
+          <span className="font-bold">User email:</span> {user.email}
+        </div>
+        <div>
+          <span className="font-bold">User id:</span> {user.id}
+        </div>
+      </div>
 
-            <DialogFooter>
-              <div className="flex gap-4 items-center">
-                <Button formAction={noAction} variant="outline">
-                  <DialogClose>Cancel</DialogClose>
+      {/* update user name */}
+      <form className="animate-in flex-1 flex flex-col w-full gap-2 text-foreground pb-4">
+        <label className="text-md" htmlFor="email">
+          Update your user name.
+        </label>
+        <input
+          className="rounded-md px-4 py-2 bg-inherit border"
+          name="username"
+          placeholder="New user name"
+          required
+        />
+        <SubmitButton
+          formAction={updateUserName}
+          className="bg-yellow-400 rounded-md px-4 py-2 text-foreground "
+          pendingText="Updating User Name..."
+        >
+          Update User Name
+        </SubmitButton>
+
+        {searchParams?.message && (
+          <p className=" p-4 bg-foreground/10 text-foreground text-center bg-gray-200 rounded-md">
+            {searchParams.message}
+          </p>
+        )}
+      </form>
+
+      <div className="">
+        <Link
+          className="bg-yellow-400 rounded-md px-4 py-2 text-foreground"
+          href="/update-password"
+        >
+          Reset your account password.
+        </Link>
+      </div>
+      <div className="flex flex-col gap-4">
+        {/* log out */}
+        <form action={noAction}>
+          {" "}
+          <Dialog>
+            <DialogTrigger asChild>
+              <div>
+                <Button variant="outline" formAction={noAction}>
+                  Log Out
                 </Button>
-
-                <form action={signOut}>
-                  <DialogClose>
-                    <Button formAction={signOut}>Log Out</Button>
-                  </DialogClose>
-                </form>
               </div>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-      </form>
-      {/* delete user account */}
-      <form action={noAction}>
-        {" "}
-        <Dialog>
-          <DialogTrigger asChild>
-            <div>
-              <Button formAction={noAction} variant="outline">
-                Delete User Account
-              </Button>
-            </div>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px] max-w-[360px] rounded-lg">
-            <DialogHeader>
-              <DialogTitle>Delete User Account?</DialogTitle>
-              <DialogDescription>
-                <span className="font-bold">Wait!</span> Are you sure you want
-                to delete your account? This action is irreversible.
-              </DialogDescription>
-            </DialogHeader>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px] max-w-[360px] rounded-lg">
+              <DialogHeader>
+                <DialogTitle>Log Out?</DialogTitle>
+                <DialogDescription>
+                  Are you sure you want to log out?
+                </DialogDescription>
+              </DialogHeader>
 
-            <DialogFooter>
-              <div className="flex gap-4 items-center">
+              <DialogFooter>
+                <div className="flex gap-4 items-center">
+                  <Button formAction={noAction} variant="outline">
+                    <DialogClose>Cancel</DialogClose>
+                  </Button>
+
+                  <form action={signOut}>
+                    <DialogClose>
+                      <Button formAction={signOut}>Log Out</Button>
+                    </DialogClose>
+                  </form>
+                </div>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        </form>
+        {/* delete user account */}
+        <form action={noAction}>
+          {" "}
+          <Dialog>
+            <DialogTrigger asChild>
+              <div>
                 <Button formAction={noAction} variant="outline">
-                  <DialogClose>Cancel</DialogClose>
+                  Delete User Account
                 </Button>
-
-                <form action={deleteUserAccount}>
-                  <DialogClose>
-                    <Button
-                      formAction={deleteUserAccount}
-                      variant="destructive"
-                    >
-                      Delete This Account
-                    </Button>
-                  </DialogClose>
-                </form>
               </div>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-      </form>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px] max-w-[360px] rounded-lg">
+              <DialogHeader>
+                <DialogTitle>Delete User Account?</DialogTitle>
+                <DialogDescription>
+                  <span className="font-bold">Wait!</span> Are you sure you want
+                  to delete your account? This action is irreversible.
+                </DialogDescription>
+              </DialogHeader>
+
+              <DialogFooter>
+                <div className="flex gap-4 items-center">
+                  <Button formAction={noAction} variant="outline">
+                    <DialogClose>Cancel</DialogClose>
+                  </Button>
+
+                  <form action={deleteUserAccount}>
+                    <DialogClose>
+                      <Button
+                        formAction={deleteUserAccount}
+                        variant="destructive"
+                      >
+                        Delete This Account
+                      </Button>
+                    </DialogClose>
+                  </form>
+                </div>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        </form>
+      </div>
     </div>
   );
 }

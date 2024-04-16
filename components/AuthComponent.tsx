@@ -11,11 +11,6 @@ import {
   //   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import AuthChangeIndicator from "./_archive/AuthChangeIndicator";
-// import {
-//   StateChangeButton,
-//   StateDisplay,
-// } from "@/components/_archive/ContextTest";
 
 export default async function AuthComponent() {
   const supabase = createClient();
@@ -47,8 +42,6 @@ export default async function AuthComponent() {
 
   return user ? (
     <div className="">
-      {/* <StateChangeButton />
-      <StateDisplay /> */}
       <DropdownMenu>
         <DropdownMenuTrigger>
           {profile?.avatar_url ? (
@@ -74,14 +67,6 @@ export default async function AuthComponent() {
           <Link href="/profile">
             <DropdownMenuItem>Profile</DropdownMenuItem>
           </Link>
-          {/* <DropdownMenuItem>
-            <form action="">
-              <button title="log out" formAction={signOut}>
-               
-                Log Out
-              </button>
-            </form>
-          </DropdownMenuItem> */}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
