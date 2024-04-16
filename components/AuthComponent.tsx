@@ -11,7 +11,7 @@ import {
   //   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import AuthChangeIndicator from "./AuthChangeIndicator";
+import AuthChangeIndicator from "./_archive/AuthChangeIndicator";
 // import {
 //   StateChangeButton,
 //   StateDisplay,
@@ -77,7 +77,8 @@ export default async function AuthComponent() {
           <DropdownMenuItem>
             <form action="">
               <button title="log out" formAction={signOut}>
-                <AuthChangeIndicator />
+                {/* <AuthChangeIndicator /> */}
+                Log Out
               </button>
             </form>
           </DropdownMenuItem>
