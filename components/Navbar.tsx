@@ -28,11 +28,14 @@ const NavBar: React.FC<NavBarProps> = ({ className }) => {
   return (
     <nav className="flex items-center border-b justify-between px-8 py-4 w-full">
       <div>
-        <Link className="font-bold text-3xl" href="/">
-          Supabase Auth
+        <Link className="font-bold text-4xl" href="/">
+          <span className="hidden sm:block">Supabase Auth</span>
+          <span className="sm:hidden">SBA</span>
         </Link>
         <p className="text-sm">
-          Authentication Template for Next.js and Supabase
+          <span className="hidden sm:block">
+            Authentication Template for Next.js and Supabase
+          </span>
         </p>
       </div>
       <div className="flex gap-4 items-center">

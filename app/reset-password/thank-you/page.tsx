@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
 
 export default function Login({
   searchParams,
@@ -15,7 +16,12 @@ export default function Login({
           </p>
         )}
         <div className="text-center pt-8">
-          <Link href="/">Home</Link>
+          <Link
+            className={buttonVariants({ variant: "outline", size: "lg" })}
+            href="/"
+          >
+            Home
+          </Link>
         </div>
       </div>
     </div>

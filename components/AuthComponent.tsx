@@ -48,8 +48,8 @@ export default async function AuthComponent() {
             <Image
               alt="avatar"
               src={profile.avatar_url}
-              width={40}
-              height={40}
+              width={42}
+              height={42}
               className="rounded-full mt-2"
             />
           ) : (

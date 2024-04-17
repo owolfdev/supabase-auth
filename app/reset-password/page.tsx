@@ -3,6 +3,7 @@ import { headers } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { SubmitButton } from "@/components/submit-button";
+import { buttonVariants } from "@/components/ui/button";
 
 export default function Login({
   searchParams,
@@ -69,7 +70,12 @@ export default function Login({
           </p>
         )}
         <div className="text-center">
-          <Link href="/login">Cancel</Link>
+          <Link
+            className={buttonVariants({ variant: "outline", size: "lg" })}
+            href="/login"
+          >
+            Cancel
+          </Link>
         </div>
       </form>
     </div>
