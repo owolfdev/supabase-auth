@@ -83,7 +83,7 @@ export default function Signup({
             {searchParams.message}
           </p>
         )}
-        <div className="text-center">
+        <div className="text-center flex flex-col gap-2 pt-6">
           <Link href="/login">Already have an account? Sign in.</Link>
         </div>
       </form>

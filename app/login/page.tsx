@@ -76,11 +76,13 @@ export default async function Login({
             {searchParams.message}
           </p>
         )}
-        <div className="text-center">
-          <Link href="/signup">No account? Create an account.</Link>
-        </div>
-        <div className="text-center">
-          <Link href="/reset-password">Forgot your password?</Link>
+        <div className="flex flex-col gap-2 pt-6">
+          <div className="text-center">
+            <Link href="/signup">No account? Create an account.</Link>
+          </div>
+          <div className="text-center">
+            <Link href="/reset-password">Forgot your password?</Link>
+          </div>
         </div>
       </form>
     </div>

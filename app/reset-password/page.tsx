@@ -69,7 +69,7 @@ export default function Login({
             {searchParams.message}
           </p>
         )}
-        <div className="text-center">
+        <div className="text-center pt-6">
           <Link
             className={buttonVariants({ variant: "outline", size: "lg" })}
             href="/login"
