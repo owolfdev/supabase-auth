@@ -69,6 +69,8 @@ You will need to create a `profiles` table with the following (suggested) table 
 - location (String): Location of the user
 - active (Boolean): Indicates whether the user is currently active or not
 
+You should create rls policies for reading privileges for all and update privileges for authenticated users only.
+
 You should create a database function that creates a new profile based on a new auth.user account.
 
 ```sql
