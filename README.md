@@ -98,3 +98,19 @@ I am using [Resend](https://resend.com/) as the Custom SMTP server to bypass the
 At supabase you will need to set the project url at `Authentication` > `Site URL` to enable your app to redirect users back to your site.
 
 You may also need to adjust the rate limit at `Rate Limits`.
+
+You will want to set up a Supabase storage bucket called `avatars`. You will need to set up rls that allows you to read and write files to the bucket.
+
+```sql
+CREATE POLICY "AllowAllReadsToAvatars"
+ON storage.objects FOR SELECT
+USING (bucket_id = 'avatars'::text);
+
+create policy "Allow authenticated uploads"
+on storage.objects
+for insert
+to authenticated
+with check (
+  bucket_id = 'avatars'
+);
+```
