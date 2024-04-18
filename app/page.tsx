@@ -23,7 +23,7 @@ export default async function Index() {
   }
 
   return (
-    <div className="flex-1 flex flex-col w-full px-8 sm:max-w-lg gap-2 py-24">
+    <div className="flex-1 flex flex-col w-full px-8 sm:max-w-lg gap-2 py-10 sm:py-24">
       <h1 className="font-bold text-4xl pb-4 text-center">
         Supabase Auth Template
       </h1>

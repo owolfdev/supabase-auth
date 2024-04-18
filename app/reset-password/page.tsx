@@ -42,7 +42,7 @@ export default function Login({
   };
 
   return (
-    <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2 py-24">
+    <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2 py-10 sm:py-24">
       <h1 className="font-bold text-4xl pb-4">Reset Password</h1>
       <form className="animate-in flex-1 flex flex-col w-full  gap-2 text-foreground">
         <label className="text-md" htmlFor="email">

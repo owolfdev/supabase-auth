@@ -40,7 +40,7 @@ export default function Signup({
   };
 
   return (
-    <div className="flex-1 flex flex-col justify-center w-full px-8 sm:max-w-md gap-2 py-24">
+    <div className="flex-1 flex flex-col justify-center w-full px-8 sm:max-w-md gap-2 py-10 sm:py-24">
       <h1 className="font-bold text-4xl pb-4">Sign Up</h1>
       <form className="flex-1 flex flex-col w-full  gap-2 text-foreground">
         <label className="text-md" htmlFor="email">

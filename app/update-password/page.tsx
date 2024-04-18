@@ -70,10 +70,9 @@ export default async function UpdateUser({
   };
 
   return (
-    <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
-      {/* <div>{sessionData?.user?.email}</div> */}
-
-      <form className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground">
+    <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md gap-2 py-10 sm:py-24">
+      <h1 className="font-bold text-4xl pb-4">Update Password</h1>
+      <form className="flex-1 flex flex-col w-full gap-2 text-foreground">
         <label className="text-md" htmlFor="password">
           New Password
         </label>
